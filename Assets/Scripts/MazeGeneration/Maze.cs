@@ -29,7 +29,7 @@ namespace ShareefSoftware
             /*
              * Replace ??? with your code
              */
-            // var grid = ???;
+            var grid = new GridGraphRandomizedNeighborsDecorator<int>(new GridGraph<int>(numberOfRows, numberOfColumns, GraphValueAccessorConstant<int>.DefaultConstant), random);
 
             var mazeGenerator = new GridTraversal<int>(grid);
 
