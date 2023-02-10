@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     public interface IGridGraph<T> : IEnumerable<(int Row, int Column, T NodeValue)>
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     class GridGraphRandomizedNeighborsDecorator<T> : IGridGraph<T>
     {

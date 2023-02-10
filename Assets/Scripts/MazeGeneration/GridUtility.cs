@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     public static class GridUtility
     {

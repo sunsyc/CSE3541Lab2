@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using SunYinchu.Lab2;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     public static class MazeQuery
     {

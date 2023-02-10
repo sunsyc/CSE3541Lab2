@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     [Flags]
-    public enum Direction {  Blank = 0, North = 1, South = 2, West = 4, East = 8 };
-    
+    public enum Direction { Blank = 0, North = 1, South = 2, West = 4, East = 8 };
+
     public static class Directions
     {
         public static readonly List<Direction> DeadEnds = new List<Direction>() { Direction.North, Direction.East, Direction.South, Direction.West };
@@ -26,5 +26,5 @@ namespace ShareefSoftware
         public static bool IsTurn(this Direction direction) => Turns.Contains(direction);
         public static bool IsTJunction(this Direction direction) => TJunctions.Contains(direction);
     }
-    
+
 }

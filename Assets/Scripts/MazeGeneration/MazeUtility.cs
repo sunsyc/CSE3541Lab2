@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SunYinchu.Lab2;
+using System;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     public enum TileStyle { Small2x2, Tight3x3, Open3x3, Wrong3x3 };
 

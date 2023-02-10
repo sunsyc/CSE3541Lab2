@@ -1,63 +1,58 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     /// Utility class to traverse a grid.
     public class GridTraversal<T>
     {
 
         private readonly IGridGraph<T> grid;
-        private readonly List<(int Row, int Column)> frontier;
-        private readonly HashSet<(int Row, int Column)> visited;
+        private readonly HashSet<(int, int)> processedCells = new HashSet<(int, int)>();
+        private readonly List<((int Row, int Column) From, (int Row, int Column) To)> walls = new List<((int Row, int Column) From, (int Row, int Column) To)>();
+        private readonly Random random = new Random();
 
         /// Constructor
         public GridTraversal(IGridGraph<T> grid)
         {
             this.grid = grid;
-            this.frontier = new List<(int Row, int Column)>();
-            this.visited = new HashSet<(int Row, int Column)>();
         }
 
-        /*
-         * Replace this with your documentation
-         * 
-         * DO NOT change the method signature
-         * Define helper methods as 'private'
-         */
-        public IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> GenerateMaze(int startRow, int startColumn)
+        private void ProcessCell((int Row, int Column) cell)
         {
-            var start = (startRow, startColumn);
-            frontier.Add(start);
-            visited.Add(start);
-
-            while (frontier.Count > 0)
+            processedCells.Add(cell);
+            foreach (var neighbor in grid.Neighbors(cell.Row, cell.Column))
             {
-                var current = frontier[0];
-                frontier.RemoveAt(0);
-
-                foreach (var neighbor in GetUnvisitedNeighbors(current))
-                {
-                    visited.Add(neighbor);
-                    frontier.Add(neighbor);
-                    yield return (current, neighbor);
-                }
+                if (processedCells.Contains(neighbor)) continue;
+                walls.Add((cell, neighbor));
             }
         }
 
-        private IEnumerable<(int Row, int Column)> GetUnvisitedNeighbors((int Row, int Column) current)
+        private ((int Row, int Column) From, (int Row, int Column) To) GetRandomWall()
         {
-            var (row, col) = current;
-            var neighbors = new List<(int, int)>
-            {
-                (row - 1, col),
-                (row + 1, col),
-                (row, col - 1),
-                (row, col + 1),
-            };
+            int randomIndex = random.Next(0, walls.Count);
+            var wall = walls[randomIndex];
+            walls.RemoveAt(randomIndex);
+            return wall;
+        }
 
-            return neighbors.Where(neighbor =>
-                grid.IsValidNode(neighbor.Item1, neighbor.Item2) && !visited.Contains(neighbor));
+        public IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> GenerateMaze(int startRow, int startColumn)
+        {
+            processedCells.Clear();
+            walls.Clear();
+
+            var startCell = (startRow, startColumn);
+            ProcessCell(startCell);
+            while (processedCells.Count < grid.NumberOfRows * grid.NumberOfColumns)
+            {
+                var wall = GetRandomWall();
+                var neighbor = processedCells.Contains(wall.From) ? wall.To : wall.From;
+                if (!processedCells.Contains(neighbor))
+                {
+                    yield return wall;
+                    ProcessCell(neighbor);
+                }
+            }
         }
     }
 }

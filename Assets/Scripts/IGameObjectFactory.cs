@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     public interface IGameObjectFactory
     {

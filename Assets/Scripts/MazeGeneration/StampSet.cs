@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     public class StampSet<TName,T>
     {

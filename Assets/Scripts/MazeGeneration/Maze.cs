@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using SunYinchu.Lab2;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     public class Maze : IGridGraph<Direction>
     {

@@ -1,4 +1,4 @@
-﻿namespace ShareefSoftware
+﻿namespace SunYinchu.Lab2
 {
     public interface IGraphValueAccessor<T>
     {

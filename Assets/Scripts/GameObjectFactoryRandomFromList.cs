@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ShareefSoftware
+namespace SunYinchu.Lab2
 {
     class GameObjectFactoryRandomFromList : IGameObjectFactory
     {
