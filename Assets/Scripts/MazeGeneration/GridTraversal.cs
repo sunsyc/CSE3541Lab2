@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 
 namespace SunYinchu.Lab2
 {
@@ -7,10 +8,10 @@ namespace SunYinchu.Lab2
     public class GridTraversal<T>
     {
 
-        private readonly IGridGraph<T> grid;
-        private readonly HashSet<(int, int)> processedCells = new HashSet<(int, int)>();
-        private readonly List<((int Row, int Column) From, (int Row, int Column) To)> walls = new List<((int Row, int Column) From, (int Row, int Column) To)>();
-        private readonly Random random = new Random();
+        private readonly IGridGraph<T> grid;    // The grid to traverse.
+        private readonly HashSet<(int, int)> processedCells = new HashSet<(int, int)>(); //Hashset to keep track of processed cells.
+        private readonly List<((int Row, int Column) From, (int Row, int Column) To)> walls = new List<((int Row, int Column) From, (int Row, int Column) To)>();   // List to keep track of the walls.
+        private readonly Random random = new Random();  // Random object to generate random numbers.
 
         /// Constructor
         public GridTraversal(IGridGraph<T> grid)
@@ -18,6 +19,10 @@ namespace SunYinchu.Lab2
             this.grid = grid;
         }
 
+        /// <summary>
+        /// Process a single cell.
+        /// </summary>
+        /// <param name="cell"> The cell to be processed. </param>
         private void ProcessCell((int Row, int Column) cell)
         {
             processedCells.Add(cell);
@@ -28,6 +33,10 @@ namespace SunYinchu.Lab2
             }
         }
 
+         /// <summary>
+         /// Get a wall from the list.
+         /// </summary>
+         /// <returns> Randomly selected wall. </returns>
         private ((int Row, int Column) From, (int Row, int Column) To) GetRandomWall()
         {
             int randomIndex = random.Next(0, walls.Count);
@@ -36,6 +45,12 @@ namespace SunYinchu.Lab2
             return wall;
         }
 
+        /// <summary>
+        /// Generate the maze.
+        /// </summary>
+        /// <param name="startRow"> The starting row of the maze. </param>
+        /// <param name="startColumn"> The starting column of the maze.</param>
+        /// <returns></returns>
         public IEnumerable<((int Row, int Column) From, (int Row, int Column) To)> GenerateMaze(int startRow, int startColumn)
         {
             processedCells.Clear();
